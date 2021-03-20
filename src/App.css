@@ -9,3 +9,101 @@
   color: white;
   text-align: center;
 }
+
+.calculator {
+  border: 2px solid red;
+}
+
+.calculator-display {
+  border: 2px solid blue;
+}
+
+.calculator-buttons {
+  border: 2px solid yellow;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: .25rem;
+  grid-template-areas: 
+  "add subtract multiply divide"
+  "seven eight nine delete"
+  "four five six clear"
+  "one two three equals"
+  "zero zero decimal equals"
+}
+
+.calculator-button {
+  padding: 1rem;
+}
+
+#zero {
+  grid-area: zero;
+}
+
+#one {
+  grid-area: one;
+}
+
+#two {
+  grid-area: two;
+}
+
+#three {
+  grid-area: three;
+}
+
+#four {
+  grid-area: four;
+}
+
+#five {
+  grid-area: five;
+}
+
+#six {
+  grid-area: six;
+}
+
+#seven {
+  grid-area: seven;
+}
+
+#eight {
+  grid-area: eight;
+}
+
+#nine {
+  grid-area: nine;
+}
+
+#add {
+  grid-area: add;
+}
+
+#subtract {
+  grid-area: subtract;
+}
+
+#multiply {
+  grid-area: multiply;
+}
+
+#divide {
+  grid-area: divide;
+}
+
+#decimal {
+  grid-area: decimal;
+}
+
+#equals {
+  grid-area: equals;
+}
+
+#delete {
+  grid-area: delete;
+}
+
+#clear {
+  grid-area: clear;
+}
