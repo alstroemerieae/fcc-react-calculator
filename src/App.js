@@ -11,7 +11,9 @@ function App() {
     // console.log(buttonValue)
     setCurrentInput([...currentInput, buttonValue]);
   }
+  console.log("Current input")
   console.log(currentInput);
+  console.log("Current result")
   console.log(operationResult)
 
   // Display the current input(?)
@@ -22,13 +24,14 @@ function App() {
   // Calculate the operation on the input(?)
   const calculateInput = () => {
     let inputArrayToString = currentInput.join('').toString();
-    setCurrentInput([inputArrayToString])
     setOperationResult([eval(inputArrayToString)]);
+    setCurrentInput([eval(inputArrayToString)]);
   }
 
   // Clear the inputs(?) and the display
   const clearInput = () => {
-    
+    setCurrentInput([]);
+    setOperationResult([]);
   }
 
   return (
@@ -36,7 +39,7 @@ function App() {
       <div className="calculator">
         <div id="display" className="calculator-display">
           {
-            operationResult.length === 0 ? currentInput : operationResult
+            currentInput.length === 0 ? 0 : currentInput
           }
         </div>
         <div className="calculator-buttons">
@@ -58,7 +61,7 @@ function App() {
           <button id="multiply" className="calculator-button" onClick={(e) => numberInput(e)}>*</button>
           <button id="divide"   className="calculator-button" onClick={(e) => numberInput(e)}>/</button>
           <button id="decimal"  className="calculator-button" onClick={(e) => numberInput(e)}>.</button>
-          <button id="clear"    className="calculator-button" onClick={(e) => numberInput(e)}>Clear</button>
+          <button id="clear"    className="calculator-button" onClick={clearInput}>Clear</button>
           <button id="delete"   className="calculator-button" onClick={(e) => numberInput(e)}>Delete</button>
         </div>
       </div>
