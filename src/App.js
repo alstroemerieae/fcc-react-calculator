@@ -4,18 +4,50 @@ import { useState } from 'react';
 function App() {
   const [currentInput, setCurrentInput] = useState([])
   const [operationResult, setOperationResult] = useState([])
+  const [decimalCounter, setDecimalCounter] = useState(0);
 
   // Save the values from the inputs
   const numberInput = (e) => {
     const buttonValue = e.target.innerText;
     const firstItem = currentInput[0];
+    const lastItem = currentInput[currentInput.length - 1];
+    console.log("Type of buttonValue")
     console.log(typeof buttonValue)
+    console.log("Button value")
     console.log(buttonValue)
-    console.log(typeof firstItem)
-    console.log(firstItem)
+    // console.log(typeof firstItem)
+    // console.log(firstItem)
+    // console.log(typeof lastItem)
+    // console.log(lastItem)
+
+    // Check for multiple zeroes input
     if (buttonValue === '0' && firstItem === '0') {
       console.log("More than one 0")
-    } else {
+    } 
+    // Check for multiple decimals input
+    // Should disable an input like "5..5"
+    else if (buttonValue === '.' && lastItem === '.') {
+      console.log("More than one consecutive decimal")
+    }
+    // Check for first decimal input
+    // Adds 1 to the decimal counter
+    else if (buttonValue === '.' && decimalCounter === 0) {
+      setDecimalCounter(decimalCounter + 1);
+      setCurrentInput([...currentInput, buttonValue]);
+      console.log("First decimal")
+    }
+    // Check for more than one decimal in the same number
+    else if (buttonValue === '.' && decimalCounter >= 1) {
+      console.log("More than one decimal in the same number")
+    }
+    // Reset decimal counter if an operator value is clicked
+    else if (buttonValue === '+' || '-' || '*' || '/') {
+      console.log("Operator clicked")
+      console.log(buttonValue)
+      setDecimalCounter(0);
+      setCurrentInput([...currentInput, buttonValue]);
+    }
+    else {
       setCurrentInput([...currentInput, buttonValue]);
     }
     
@@ -24,6 +56,8 @@ function App() {
   console.log(currentInput);
   console.log("Current result")
   console.log(operationResult)
+  console.log("Current counter")
+  console.log(decimalCounter)
 
   // Display the current input(?)
   // const displayInput = () => {
