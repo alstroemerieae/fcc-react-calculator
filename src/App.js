@@ -8,8 +8,17 @@ function App() {
   // Save the values from the inputs
   const numberInput = (e) => {
     const buttonValue = e.target.innerText;
-    // console.log(buttonValue)
-    setCurrentInput([...currentInput, buttonValue]);
+    const firstItem = currentInput[0];
+    console.log(typeof buttonValue)
+    console.log(buttonValue)
+    console.log(typeof firstItem)
+    console.log(firstItem)
+    if (buttonValue === '0' && firstItem === '0') {
+      console.log("More than one 0")
+    } else {
+      setCurrentInput([...currentInput, buttonValue]);
+    }
+    
   }
   console.log("Current input")
   console.log(currentInput);
