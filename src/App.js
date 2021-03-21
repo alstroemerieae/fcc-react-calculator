@@ -2,24 +2,28 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [inputs, setInputs] = useState([])
+  const [currentInput, setCurrentInput] = useState([])
+  const [operationResult, setOperationResult] = useState([])
 
   // Save the values from the inputs
   const numberInput = (e) => {
     const buttonValue = e.target.innerText;
-    setInputs([...inputs, buttonValue]);
-    // console.log(e.target.innerText);
-    // console.log("Test");
+    // console.log(buttonValue)
+    setCurrentInput([...currentInput, buttonValue]);
   }
+  console.log(currentInput);
+  console.log(operationResult)
 
   // Display the current input(?)
-  const displayInput = () => {
-    
-  }
+  // const displayInput = () => {
+  //   const display = 
+  // }
 
   // Calculate the operation on the input(?)
   const calculateInput = () => {
-    
+    let inputArrayToString = currentInput.join('').toString();
+    setCurrentInput([inputArrayToString])
+    setOperationResult([eval(inputArrayToString)]);
   }
 
   // Clear the inputs(?) and the display
@@ -31,7 +35,9 @@ function App() {
     <div className="App">
       <div className="calculator">
         <div id="display" className="calculator-display">
-          {inputs}
+          {
+            operationResult.length === 0 ? currentInput : operationResult
+          }
         </div>
         <div className="calculator-buttons">
           {/* Numbers */}
@@ -46,7 +52,7 @@ function App() {
           <button id="eight"    className="calculator-button" onClick={(e) => numberInput(e)}>8</button>
           <button id="nine"     className="calculator-button" onClick={(e) => numberInput(e)}>9</button>
           {/* Operations */}
-          <button id="equals"   className="calculator-button" onClick={(e) => numberInput(e)}>=</button>
+          <button id="equals"   className="calculator-button" onClick={calculateInput}>=</button>
           <button id="add"      className="calculator-button" onClick={(e) => numberInput(e)}>+</button>
           <button id="subtract" className="calculator-button" onClick={(e) => numberInput(e)}>-</button>
           <button id="multiply" className="calculator-button" onClick={(e) => numberInput(e)}>*</button>
