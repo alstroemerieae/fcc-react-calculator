@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 function App() {
   const [currentInput, setCurrentInput] = useState([])
-  const [operationResult, setOperationResult] = useState([])
+  // const [operationResult, setOperationResult] = useState([])
   const [decimalCounter, setDecimalCounter] = useState(0);
 
   // Save the values from the inputs
@@ -60,8 +60,8 @@ function App() {
   }
   console.log("Current input")
   console.log(currentInput);
-  console.log("Current result")
-  console.log(operationResult)
+  // console.log("Current result")
+  // console.log(operationResult)
   console.log("Current counter")
   console.log(decimalCounter)
 
@@ -73,15 +73,23 @@ function App() {
   // Calculate the operation on the input(?)
   const calculateInput = () => {
     let inputArrayToString = currentInput.join('').toString();
-    setOperationResult([eval(inputArrayToString)]);
-    setCurrentInput([eval(inputArrayToString)]);
+    console.log("Type of current input to string")
+    console.log(typeof inputArrayToString)
+    console.log(inputArrayToString)
+    const regex = /(\*|\+|\/|-)?(\.|\-)?\d+/g;
+    const found = inputArrayToString.match(regex).join('');
+    console.log("Type of found")
+    console.log(typeof found)
+    console.log(found)
+    // setOperationResult([eval(inputArrayToString)]);
+    setCurrentInput([eval(found)]);
     // setDecimalCounter(0);
   }
 
   // Clear the inputs(?) and the display
   const clearInput = () => {
     setCurrentInput([]);
-    setOperationResult([]);
+    // setOperationResult([]);
     setDecimalCounter(0);
   }
 
