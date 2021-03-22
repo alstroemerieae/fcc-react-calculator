@@ -2,94 +2,74 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [currentInput, setCurrentInput] = useState([])
-  // const [operationResult, setOperationResult] = useState([])
+  // States
+  const [currentInput, setCurrentInput] = useState([]);
   const [decimalCounter, setDecimalCounter] = useState(0);
 
-  // Save the values from the inputs
+  // This function should save the values from the inputs
   const numberInput = (e) => {
     const buttonValue = e.target.innerText;
     const firstItem = currentInput[0];
     const lastItem = currentInput[currentInput.length - 1];
-    console.log("______________________________")
-    console.log("Type of buttonValue")
-    console.log(typeof buttonValue)
-    console.log("Button value")
-    console.log(buttonValue)
 
     // Check for multiple zeroes input
+    // Should disable an input like "0000"
     if (buttonValue === '0' && firstItem === '0') {
-      console.log("More than one 0")
-      console.log("First IF")
+      console.log("More than one 0");
     } 
     // Check for multiple decimals input
     // Should disable an input like "5..5"
     else if (buttonValue === '.' && lastItem === '.') {
-      console.log("More than one consecutive decimal")
-      console.log("Second IF")
+      console.log("More than one consecutive decimal");
     }
-    // Check for first decimal input
-    // Adds 1 to the decimal counter
+    // Check for a decimal input
+    // An input like "5.5" should add 1 to the decimalCounter
     else if (buttonValue === '.' && decimalCounter === 0) {
       setDecimalCounter(decimalCounter + 1);
       setCurrentInput([...currentInput, buttonValue]);
-      console.log("First decimal")
-      console.log("Third IF")
+      console.log("A decimal was inputted");
     }
     // Check for more than one decimal in the same number
+    // An input like "5.5.5" shouldn't be able to be passed, instead "5.55" would be passed
     else if (buttonValue === '.' && decimalCounter === 1) {
-      console.log("More than one decimal in the same number")
-      console.log("Fourth IF")
+      console.log("More than one decimal in the same number");
     }
     // Check for operators input
-    // Reset decimal counter to 0
+    // Reset decimal counter to 0 after clicking a operator button
     else if (buttonValue === '+' || buttonValue ===  '-' || buttonValue === '*' || buttonValue ===  '/') {
-      console.log("Operator clicked")
-      console.log("Reset decimal counter")
-      console.log(buttonValue)
+      console.log("Operator clicked");
+      console.log("Reset decimal counter");
       setDecimalCounter(0);
       setCurrentInput([...currentInput, buttonValue]);
-      console.log("Fifth IF")
     }
+    // This should execute if only numbers are passed
     else {
       setCurrentInput([...currentInput, buttonValue]);
-      console.log("Error")
-      console.log("No IF")
+      console.log("Passing a number");
     }
     
   }
-  console.log("Current input")
-  console.log(currentInput);
-  // console.log("Current result")
-  // console.log(operationResult)
-  console.log("Current counter")
-  console.log(decimalCounter)
 
-  // Display the current input(?)
-  // const displayInput = () => {
-  //   const display = 
-  // }
-
-  // Calculate the operation on the input(?)
+  // This function returns the calculation of a filtered string without the consecutive characters,
+  // ignoring the subtract character if it is last,
+  // which is then passed to setCurrentInput as an argument.
+  // 
+  // For example, if the value of currentInput array is ['5','*','-','+','5',]
+  // It would be converted to a string like => "5 * - + 5"
+  // After that it would be filtered by the regex as an array like => ["5","+5"]
+  // Then it would be converted with the join() method into an string like => "5+5"
+  // After that it would be evaluated by the eval() function, which should return the value of the calculation => "5+5" = 10
+  // Finally, this value would be passed to setCurrentInput as an argument.
   const calculateInput = () => {
-    let inputArrayToString = currentInput.join('').toString();
-    console.log("Type of current input to string")
-    console.log(typeof inputArrayToString)
-    console.log(inputArrayToString)
+    let currentInputToString = currentInput.join('').toString();
     const regex = /(\*|\+|\/|-)?(\.|\-)?\d+/g;
-    const found = inputArrayToString.match(regex).join('');
-    console.log("Type of found")
-    console.log(typeof found)
-    console.log(found)
-    // setOperationResult([eval(inputArrayToString)]);
-    setCurrentInput([eval(found)]);
-    // setDecimalCounter(0);
+    const filteredInput = eval(currentInputToString.match(regex).join(''));
+    setCurrentInput([filteredInput]);
   }
 
-  // Clear the inputs(?) and the display
+  // This function should clear the current input and the decimal counter
   const clearInput = () => {
     setCurrentInput([]);
-    // setOperationResult([]);
     setDecimalCounter(0);
   }
 
