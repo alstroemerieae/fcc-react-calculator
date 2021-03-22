@@ -11,23 +11,22 @@ function App() {
     const buttonValue = e.target.innerText;
     const firstItem = currentInput[0];
     const lastItem = currentInput[currentInput.length - 1];
+    console.log("______________________________")
     console.log("Type of buttonValue")
     console.log(typeof buttonValue)
     console.log("Button value")
     console.log(buttonValue)
-    // console.log(typeof firstItem)
-    // console.log(firstItem)
-    // console.log(typeof lastItem)
-    // console.log(lastItem)
 
     // Check for multiple zeroes input
     if (buttonValue === '0' && firstItem === '0') {
       console.log("More than one 0")
+      console.log("First IF")
     } 
     // Check for multiple decimals input
     // Should disable an input like "5..5"
     else if (buttonValue === '.' && lastItem === '.') {
       console.log("More than one consecutive decimal")
+      console.log("Second IF")
     }
     // Check for first decimal input
     // Adds 1 to the decimal counter
@@ -35,20 +34,27 @@ function App() {
       setDecimalCounter(decimalCounter + 1);
       setCurrentInput([...currentInput, buttonValue]);
       console.log("First decimal")
+      console.log("Third IF")
     }
     // Check for more than one decimal in the same number
-    else if (buttonValue === '.' && decimalCounter >= 1) {
+    else if (buttonValue === '.' && decimalCounter === 1) {
       console.log("More than one decimal in the same number")
+      console.log("Fourth IF")
     }
-    // Reset decimal counter if an operator value is clicked
-    else if (buttonValue === '+' || '-' || '*' || '/') {
+    // Check for operators input
+    // Reset decimal counter to 0
+    else if (buttonValue === '+' || buttonValue ===  '-' || buttonValue === '*' || buttonValue ===  '/') {
       console.log("Operator clicked")
+      console.log("Reset decimal counter")
       console.log(buttonValue)
       setDecimalCounter(0);
       setCurrentInput([...currentInput, buttonValue]);
+      console.log("Fifth IF")
     }
     else {
       setCurrentInput([...currentInput, buttonValue]);
+      console.log("Error")
+      console.log("No IF")
     }
     
   }
@@ -69,12 +75,14 @@ function App() {
     let inputArrayToString = currentInput.join('').toString();
     setOperationResult([eval(inputArrayToString)]);
     setCurrentInput([eval(inputArrayToString)]);
+    // setDecimalCounter(0);
   }
 
   // Clear the inputs(?) and the display
   const clearInput = () => {
     setCurrentInput([]);
     setOperationResult([]);
+    setDecimalCounter(0);
   }
 
   return (
