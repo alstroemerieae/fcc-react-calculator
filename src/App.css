@@ -10,21 +10,29 @@
   text-align: center;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--default-primary-color:#1d1d1d;
+	--screen-bg-color: rgb(95, 187, 59);
+	--screen-text-color: rgb(27, 27, 27);
+}
+
+
 .calculator {
-  border: 2px solid red;
-}
-
-.calculator-display {
-  border: 2px solid blue;
-}
-
-.calculator-buttons {
-  border: 2px solid yellow;
+  background-color: var(--default-primary-color);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   gap: .25rem;
+  padding: 1rem;
   grid-template-areas: 
+  "display display display display"
+  "display display display display"
   "add subtract multiply divide"
   "seven eight nine delete"
   "four five six clear"
@@ -32,8 +40,20 @@
   "zero zero decimal equals"
 }
 
+.calculator-display {
+  background-color: var(--screen-bg-color);
+}
+
+.calculator-buttons {
+  background-color: yellow;
+}
+
 .calculator-button {
   padding: 1rem;
+}
+
+#display {
+  grid-area: display;
 }
 
 #zero {
